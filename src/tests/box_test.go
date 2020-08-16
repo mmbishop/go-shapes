@@ -1,6 +1,7 @@
-package shapes
+package tests
 
 import (
+	. "shapes"
 	"testing"
 )
 
