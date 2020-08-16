@@ -1,5 +1,7 @@
 package shapes
 
+import "fmt"
+
 type Rectangle struct {
 	*AbstractShape
 	width  float64
@@ -21,4 +23,8 @@ func (r Rectangle) Height() float64 {
 func (r Rectangle) GetBoundingBox() Box {
 	upperLeft := r.GetLocation()
 	return NewBox(upperLeft, NewPoint(upperLeft.X()+r.width, upperLeft.Y()+r.height))
+}
+
+func (r Rectangle) String() string {
+	return fmt.Sprintf("Rectangle{location: %v, width: %f, height: %f}", r.GetLocation(), r.width, r.height)
 }

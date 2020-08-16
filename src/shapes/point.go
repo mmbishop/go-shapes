@@ -1,5 +1,7 @@
 package shapes
 
+import "fmt"
+
 type Point struct {
 	x float64
 	y float64
@@ -16,4 +18,8 @@ func (p Point) X() float64 {
 
 func (p Point) Y() float64 {
 	return p.y
+}
+
+func (p Point) String() string {
+	return fmt.Sprintf("Point{x: %f, y: %f}", p.x, p.y)
 }

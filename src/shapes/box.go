@@ -1,5 +1,7 @@
 package shapes
 
+import "fmt"
+
 type Box struct {
 	upperLeft  Point
 	lowerRight Point
@@ -16,4 +18,8 @@ func (b Box) UpperLeft() Point {
 
 func (b Box) LowerRight() Point {
 	return b.lowerRight
+}
+
+func (b Box) String() string {
+	return fmt.Sprintf("BoundingBox{upperLeft: %v, lowerRight: %v}", b.UpperLeft(), b.LowerRight())
 }
