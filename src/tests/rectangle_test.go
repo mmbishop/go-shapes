@@ -5,24 +5,23 @@ import (
 	"testing"
 )
 
-var boundingBox Box
-var r Rectangle
+var r *Rectangle
 
 func new_rectangle_is_created(t *testing.T) {
 	when_a_new_rectangle_is_requested()
 	then_a_new_rectangle_is_created(t)
 }
 
-func rectangle_returns_its_bounding_box(t *testing.T) {
-	given_a_rectangle()
-	when_its_bounding_box_is_requested()
-	then_its_bounding_box_is_returned(t)
-}
-
 func rectangle_is_moved_by_specified_offset(t *testing.T) {
 	given_a_rectangle()
 	when_the_rectangle_is_moved()
 	then_the_rectangle_is_at_the_current_new_location(t)
+}
+
+func rectangle_is_resized_by_a_specified_area_ratio(t *testing.T) {
+	given_a_rectangle()
+	when_the_rectangle_is_resized()
+	then_the_rectangle_is_resized_to_the_requested_area(t)
 }
 
 func given_a_rectangle() {
@@ -33,12 +32,12 @@ func when_a_new_rectangle_is_requested() {
 	r = NewRectangle(NewPoint(3, 4), 5, 6)
 }
 
-func when_its_bounding_box_is_requested() {
-	boundingBox = r.GetBoundingBox()
-}
-
 func when_the_rectangle_is_moved() {
 	r.Move(2, 3)
+}
+
+func when_the_rectangle_is_resized() {
+	r.Resize(2)
 }
 
 func then_a_new_rectangle_is_created(t *testing.T) {
@@ -49,14 +48,6 @@ func then_a_new_rectangle_is_created(t *testing.T) {
 	}
 }
 
-func then_its_bounding_box_is_returned(t *testing.T) {
-	upperLeft := boundingBox.UpperLeft()
-	lowerRight := boundingBox.LowerRight()
-	if upperLeft.X() != 3 || upperLeft.Y() != 4 || lowerRight.X() != 8 || lowerRight.Y() != 10 {
-		t.Errorf("Wanted BoundingBox{{3, 4}, {8, 10}}, got BoundingBox{{%f, %f}, {%f, %f}}", upperLeft.X(), upperLeft.Y(), lowerRight.X(), lowerRight.Y())
-	}
-}
-
 func then_the_rectangle_is_at_the_current_new_location(t *testing.T) {
 	location := r.GetLocation()
 	if location.X() != 5 || location.Y() != 7 {
@@ -64,14 +55,22 @@ func then_the_rectangle_is_at_the_current_new_location(t *testing.T) {
 	}
 }
 
+func then_the_rectangle_is_resized_to_the_requested_area(t *testing.T) {
+	area := r.Width() * r.Height()
+	if area != 60 {
+		t.Errorf("Wanted a rectangle with area 15, got a rectangle with area %f (width: %f, height = %f)",
+			area, r.Width(), r.Height())
+	}
+}
+
 func TestNewRectangle(t *testing.T) {
 	new_rectangle_is_created(t)
 }
 
-func TestGetRectangleBoundingBox(t *testing.T) {
-	rectangle_returns_its_bounding_box(t)
-}
-
 func TestMoveRectangle(t *testing.T) {
 	rectangle_is_moved_by_specified_offset(t)
+}
+
+func TestResizeRectangle(t *testing.T) {
+	rectangle_is_resized_by_a_specified_area_ratio(t)
 }

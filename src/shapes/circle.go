@@ -1,23 +1,26 @@
 package shapes
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Circle struct {
 	*AbstractShape
 	radius float64
 }
 
-func NewCircle(center Point, radius float64) Circle {
-	return Circle{&AbstractShape{center}, radius}
+func NewCircle(center Point, radius float64) *Circle {
+	return &Circle{&AbstractShape{center}, radius}
 }
 
-func (c Circle) GetRadius() float64 {
+func (c Circle) Radius() float64 {
 	return c.radius
 }
 
-func (c Circle) GetBoundingBox() Box {
-	center := c.GetLocation()
-	return NewBox(NewPoint(center.X()-c.radius, center.Y()-c.radius), NewPoint(center.X()+c.radius, center.Y()+c.radius))
+func (c *Circle) Resize(newAreaRatio float64) {
+	area := math.Pi * c.radius * c.radius * newAreaRatio
+	c.radius = math.Sqrt(area / math.Pi)
 }
 
 func (c Circle) String() string {
