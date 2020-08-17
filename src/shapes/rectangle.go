@@ -33,5 +33,5 @@ func (r *Rectangle) Resize(newAreaRatio float64) {
 }
 
 func (r Rectangle) String() string {
-	return fmt.Sprintf("Rectangle{location: %v, width: %f, height: %f}", r.GetLocation(), r.width, r.height)
+	return fmt.Sprintf("Rectangle{location: %v, width: %f, height: %f}", r.Location(), r.width, r.height)
 }

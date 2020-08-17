@@ -24,5 +24,5 @@ func (c *Circle) Resize(newAreaRatio float64) {
 }
 
 func (c Circle) String() string {
-	return fmt.Sprintf("Circle{center: %v, radius: %f}", c.GetLocation(), c.radius)
+	return fmt.Sprintf("Circle{center: %v, radius: %f}", c.Location(), c.radius)
 }

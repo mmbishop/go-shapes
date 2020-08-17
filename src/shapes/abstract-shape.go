@@ -4,7 +4,7 @@ type AbstractShape struct {
 	location Point
 }
 
-func (a AbstractShape) GetLocation() Point {
+func (a AbstractShape) Location() Point {
 	return a.location
 }
 

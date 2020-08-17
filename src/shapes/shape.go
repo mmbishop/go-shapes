@@ -2,9 +2,9 @@ package shapes
 
 type Shape interface {
 
-	// GetLocation returns the location of a Shape. The interpretation of the location (e.g., center or a vertex) is
+	// Location returns the location of a Shape. The interpretation of the location (e.g., center or a vertex) is
 	// up to the Shape subclass.
-	GetLocation() Point
+	Location() Point
 
 	// Move translates a Shape by the given x and y offsets.
 	Move(dx float64, dy float64)

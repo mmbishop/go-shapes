@@ -41,14 +41,14 @@ func when_the_circle_is_resized() {
 }
 
 func then_a_new_circle_is_created(t *testing.T) {
-	center := c.GetLocation()
+	center := c.Location()
 	if center.X() != 3 || center.Y() != 4 || c.Radius() != 5 {
 		t.Errorf("Wanted Circle{center: {3, 4}, radius: 5}, got Circle{center: {%f, %f}, radius: %f}", center.X(), center.Y(), c.Radius())
 	}
 }
 
 func then_the_circle_is_at_the_current_new_location(t *testing.T) {
-	center := c.GetLocation()
+	center := c.Location()
 	if center.X() != 5 || center.Y() != 7 {
 		t.Errorf("Wanted circle at {5, 7}, got circle at {%f, %f}", center.X(), center.Y())
 	}

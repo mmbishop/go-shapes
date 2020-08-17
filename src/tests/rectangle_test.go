@@ -41,7 +41,7 @@ func when_the_rectangle_is_resized() {
 }
 
 func then_a_new_rectangle_is_created(t *testing.T) {
-	location := r.GetLocation()
+	location := r.Location()
 	if location.X() != 3 || location.Y() != 4 || r.Width() != 5 || r.Height() != 6 {
 		t.Errorf("Wanted Rectangle{location: {3, 4}, width: 5, height: 6}, got Rectangle{location: {%f, %f}, width: %f, height: %f}",
 			location.X(), location.Y(), r.Width(), r.Height())
@@ -49,7 +49,7 @@ func then_a_new_rectangle_is_created(t *testing.T) {
 }
 
 func then_the_rectangle_is_at_the_current_new_location(t *testing.T) {
-	location := r.GetLocation()
+	location := r.Location()
 	if location.X() != 5 || location.Y() != 7 {
 		t.Errorf("Wanted rectangle at {5, 6}, got rectangle at {%f, %f}", location.X(), location.Y())
 	}
