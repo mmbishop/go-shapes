@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"github.com/stretchr/testify/assert"
 	. "shapes"
 	"testing"
 )
@@ -42,25 +43,19 @@ func when_the_rectangle_is_resized() {
 
 func then_a_new_rectangle_is_created(t *testing.T) {
 	location := r.Location()
-	if location.X() != 3 || location.Y() != 4 || r.Width() != 5 || r.Height() != 6 {
-		t.Errorf("Wanted Rectangle{location: {3, 4}, width: 5, height: 6}, got Rectangle{location: {%f, %f}, width: %f, height: %f}",
-			location.X(), location.Y(), r.Width(), r.Height())
-	}
+	assert.Equal(t, NewPoint(3, 4), location)
+	assert.Equal(t, 5.0, r.Width())
+	assert.Equal(t, 6.0, r.Height())
 }
 
 func then_the_rectangle_is_at_the_current_new_location(t *testing.T) {
 	location := r.Location()
-	if location.X() != 5 || location.Y() != 7 {
-		t.Errorf("Wanted rectangle at {5, 6}, got rectangle at {%f, %f}", location.X(), location.Y())
-	}
+	assert.Equal(t, NewPoint(5, 7), location)
 }
 
 func then_the_rectangle_is_resized_to_the_requested_area(t *testing.T) {
 	area := r.Width() * r.Height()
-	if area != 60 {
-		t.Errorf("Wanted a rectangle with area 15, got a rectangle with area %f (width: %f, height = %f)",
-			area, r.Width(), r.Height())
-	}
+	assert.Equal(t, 60.0, area)
 }
 
 func TestNewRectangle(t *testing.T) {

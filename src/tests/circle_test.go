@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"github.com/stretchr/testify/assert"
 	. "shapes"
 	"testing"
 )
@@ -42,22 +43,17 @@ func when_the_circle_is_resized() {
 
 func then_a_new_circle_is_created(t *testing.T) {
 	center := c.Location()
-	if center.X() != 3 || center.Y() != 4 || c.Radius() != 5 {
-		t.Errorf("Wanted Circle{center: {3, 4}, radius: 5}, got Circle{center: {%f, %f}, radius: %f}", center.X(), center.Y(), c.Radius())
-	}
+	assert.Equal(t, NewPoint(3, 4), center)
+	assert.Equal(t, 5.0, c.Radius())
 }
 
 func then_the_circle_is_at_the_current_new_location(t *testing.T) {
 	center := c.Location()
-	if center.X() != 5 || center.Y() != 7 {
-		t.Errorf("Wanted circle at {5, 7}, got circle at {%f, %f}", center.X(), center.Y())
-	}
+	assert.Equal(t, NewPoint(5, 7), center)
 }
 
 func then_the_circle_is_resized_to_the_requested_area(t *testing.T) {
-	if c.Radius() > 7.000001 || c.Radius() < 6.999999 {
-		t.Errorf("Wanted circle with radius 7, got circle with radius %f", c.Radius())
-	}
+	assert.InDelta(t, 7.0, c.Radius(), 0.000001)
 }
 
 func TestNewCircle(t *testing.T) {

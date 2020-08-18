@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"github.com/stretchr/testify/assert"
 	. "shapes"
 	"testing"
 )
@@ -17,9 +18,8 @@ func when_a_new_point_is_requested() {
 }
 
 func then_a_new_point_is_created(t *testing.T) {
-	if p.X() != 3 || p.Y() != 4 {
-		t.Errorf("Wanted {3, 4}, got {%f, %f}\n", p.X(), p.Y())
-	}
+	assert.Equal(t, 3.0, p.X())
+	assert.Equal(t, 4.0, p.Y())
 }
 
 func TestNewPoint(t *testing.T) {
